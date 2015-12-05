@@ -57,7 +57,7 @@ $ curl -i http://localhost:8080/rest/mars
 
   {"axisX":0,"axisY":0,"direction":"NORTH"}
 ```
-* Rotate
+* Rotate  
 You can rotate left and right by sending L or R values on path param
 ```
 $ curl -i localhost:8080/rest/mars/L
