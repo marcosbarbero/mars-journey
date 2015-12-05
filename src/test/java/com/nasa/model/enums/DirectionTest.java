@@ -1,12 +1,12 @@
-package com.nasa.modal.enums;
+package com.nasa.model.enums;
 
-import com.nasa.model.enums.Direction;
-import com.nasa.model.enums.Rotation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Unit Tests for ${@link Direction}.
+ *
  * @author marcos.barbero
  */
 public class DirectionTest {
