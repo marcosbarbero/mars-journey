@@ -129,3 +129,42 @@ $ curl -i -X POST http://localhost:8080/rest/mars/reset
 
 Errors
 ---
+* 405: Method not allowed 
+All listed endpoints are responding only with GET Http Method, any other method will result in a 405 status code
+```
+$ curl -i -X POST http://localhost:8080/rest/mars
+  HTTP/1.1 405 Method Not Allowed
+  Allow: HEAD, GET, OPTIONS
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Length: 0
+  Date: Sat, 05 Dec 2015 23:12:29 GMT
+```
+* 400: Bad Request  
+When you try to send invalid command to Mars Explorer you will get a 400 status code and the following error message. 
+```
+$ curl -i -X GET http://localhost:8080/rest/mars/AAA
+  HTTP/1.1 400 Bad Request
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Type: application/json
+  Content-Length: 62
+  Date: Sat, 05 Dec 2015 23:15:37 GMT
+  
+  {"code":"BadRequest","message":"Unknown command received: 'A"}
+```
+Another way to get the same error is sending invalid the explorer out of the specified area (5x5).
+```
+$ curl -i -X GET http://localhost:8080/rest/mars/MMMMMMMMMMMMMMMMMMMMMMM
+  HTTP/1.1 400 Bad Request
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Type: application/json
+  Content-Length: 108
+  Date: Sat, 05 Dec 2015 23:18:22 GMT
+  
+  {"code":"BadRequest","message":"The position '5' is out of allowed bound. Min. value: '0', Max. value: '4'"}
+```
