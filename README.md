@@ -168,3 +168,7 @@ $ curl -i -X GET http://localhost:8080/rest/mars/MMMMMMMMMMMMMMMMMMMMMMM
   
   {"code":"BadRequest","message":"The position '5' is out of allowed bound. Min. value: '0', Max. value: '4'"}
 ```
+
+Final Notes
+---
+The listed samples were made running the project on Server ROOT path and on 8080 port, in case you add any application contextPath then you'll need to add the choosen context to the samples and use the same approach if you change the server port.
