@@ -20,6 +20,7 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
     private static final Logger logger = Logger.getLogger(ExplorerRoutingServiceImpl.class.getCanonicalName());
 
     private static final int STEP = 1;
+
     @Inject
     private ExplorerStepValidator validator;
 
