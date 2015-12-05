@@ -24,16 +24,16 @@ To run this project you can use two approaches:
 Packages
 ---
 At this session I'll be explaining the project package structure.
-- com.nasa *Root package*
-  - business *The Business layer*
-  - config *Contains the Startup class*
-  - exception *Custom Exceptions*
-  - model 
-    - beans *Model beans - Could be entities if we were using any database*
-    - enums *Model Enums - Invariable values*
-    - repository *Data repository - Just a fake InMemory repository to keeps the Mars explorer robot and the routing trace"
-  - service *Services to access repository layer*
-  - validator *Validations classes*
-  - web *Web layer*
-    - provider *Exception handler provider*
-    - resources *Web Resources*
+- com.nasa: *Root package*
+  - business: *The Business layer*
+  - config: *Contains the Startup class*
+  - exception: *Custom Exceptions*
+  - model: *Model layer* 
+    - beans: *Model beans - Could be entities if we were using any database*
+    - enums: *Model Enums - Invariable values*
+    - repository: *Data repository - Just a fake InMemory repository to keeps the Mars explorer robot and the routing trace"
+  - service: *Services to access repository layer*
+  - validator: *Validations classes*
+  - web: *Web layer*
+    - provider: *Exception handler provider*
+    - resources: *Web Resources*
