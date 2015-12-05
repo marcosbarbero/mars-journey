@@ -1,11 +1,14 @@
 package com.nasa.web.resources;
 
+import com.nasa.business.ExplorerRoutingBusiness;
 import com.nasa.model.beans.MarsExplorer;
-import com.nasa.model.service.ExplorerRoutingService;
+import sun.security.provider.certpath.OCSPResponse;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -21,18 +24,7 @@ public class ExplorerRoutingResource {
     public static final Logger logger = Logger.getLogger(ExplorerRoutingResource.class.getCanonicalName());
 
     @Inject
-    private ExplorerRoutingService routingService;
-
-    /**
-     * Return ${@link MarsExplorer}.
-     *
-     * @return The ${@link MarsExplorer}
-     */
-    private MarsExplorer marsExplorer() {
-        final MarsExplorer marsExplorer = this.routingService.getMarsExplorer();
-        logger.info("Getting the current MarsExplorer position: " + marsExplorer.toString());
-        return marsExplorer;
-    }
+    private ExplorerRoutingBusiness business;
 
     /**
      * Return the current MarsExplorer.
@@ -41,19 +33,7 @@ public class ExplorerRoutingResource {
      */
     @GET
     public Response getMarsExplorer() {
-        return Response.ok(marsExplorer()).build();
-    }
-
-    /**
-     * Reset the current MarsExplorer to initial position.
-     *
-     * @return Response status OK (200).
-     */
-    @POST
-    public Response resetMarsExplorer() {
-        logger.info("Just reset the MarsExplorer to initial position.");
-        this.routingService.resetMarsExplorer();
-        return Response.ok(marsExplorer()).build();
+        return Response.ok(this.business.getMarsExplorer()).build();
     }
 
     /**
@@ -65,6 +45,31 @@ public class ExplorerRoutingResource {
     @GET
     @Path("{command}")
     public Response move(@PathParam("command") String command) {
-        return Response.ok(this.routingService.move(command)).build();
+        return Response.ok(this.business.move(command)).build();
+    }
+
+    /**
+     * Reset the current MarsExplorer to initial position.
+     *
+     * @return Response status OK (200).
+     */
+    @POST
+    @Path("/reset")
+    public Response resetMarsExplorer() {
+        logger.info("Just reset the MarsExplorer to initial position.");
+        return Response.ok(this.business.resetMarsExplorer()).build();
+    }
+
+    @GET
+    @Path("/trace")
+    public Response trace() {
+        Response response;
+        List<MarsExplorer> explorers = this.business.trace();
+        if (explorers.isEmpty()) {
+            response = Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            response = Response.ok(explorers).build();
+        }
+        return response;
     }
 }
