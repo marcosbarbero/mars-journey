@@ -2,13 +2,11 @@ package com.nasa.web.resources;
 
 import com.nasa.business.ExplorerRoutingBusiness;
 import com.nasa.model.beans.MarsExplorer;
-import sun.security.provider.certpath.OCSPResponse;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -60,6 +58,11 @@ public class ExplorerRoutingResource {
         return Response.ok(this.business.resetMarsExplorer()).build();
     }
 
+    /**
+     * Return the trace of MarsExplorer movements.
+     *
+     * @return Trace of MarsExplorer movments.
+     */
     @GET
     @Path("/trace")
     public Response trace() {

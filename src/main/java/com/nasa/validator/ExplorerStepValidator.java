@@ -1,4 +1,4 @@
-package com.nasa.model.validator;
+package com.nasa.validator;
 
 /**
  * Helper class to perform some validation.

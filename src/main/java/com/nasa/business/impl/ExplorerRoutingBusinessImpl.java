@@ -3,7 +3,7 @@ package com.nasa.business.impl;
 import com.nasa.business.ExplorerRoutingBusiness;
 import com.nasa.model.beans.MarsExplorer;
 import com.nasa.model.enums.Rotation;
-import com.nasa.model.validator.ExplorerStepValidator;
+import com.nasa.validator.ExplorerStepValidator;
 import com.nasa.service.ExplorerRoutingService;
 
 import javax.inject.Inject;

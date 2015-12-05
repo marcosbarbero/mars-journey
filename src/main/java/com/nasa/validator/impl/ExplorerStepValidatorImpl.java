@@ -1,8 +1,8 @@
-package com.nasa.model.validator.impl;
+package com.nasa.validator.impl;
 
 import com.nasa.exception.BadRequestException;
 import com.nasa.model.enums.Rotation;
-import com.nasa.model.validator.ExplorerStepValidator;
+import com.nasa.validator.ExplorerStepValidator;
 
 import javax.inject.Named;
 
