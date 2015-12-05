@@ -19,8 +19,8 @@ $ mvn clean package
 ```
 #####Run
 To run this project you can use two approaches:
-1. Configure the JBoss WildFly at your favorite IDE, add the mars-journey project in the server and run.
-2. Deploy the generated .war from ${baseDir}/target into your WildFly server.
+ - Configure the JBoss WildFly at your favorite IDE, add the mars-journey project in the server and run.  
+ - Deploy the generated .war from ${baseDir}/target into your WildFly server.
 
 Packages
 ---
