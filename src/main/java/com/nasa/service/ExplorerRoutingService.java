@@ -3,8 +3,6 @@ package com.nasa.service;
 import com.nasa.model.beans.MarsExplorer;
 import com.nasa.model.enums.Rotation;
 
-import java.util.List;
-
 /**
  * Service layer of ${@link com.nasa.model.beans.MarsExplorer} routing.
  *
@@ -35,19 +33,4 @@ public interface ExplorerRoutingService {
      * Move the ${@link com.nasa.model.beans.MarsExplorer}.
      */
     void move();
-
-    /**
-     * Get All ${@link MarsExplorer}.
-     *
-     * @return List of ${@link MarsExplorer}
-     */
-    List<MarsExplorer> getAll();
-
-    /**
-     * Save a new ${@link MarsExplorer}.
-     *
-     * @param marsExplorer The ${@link MarsExplorer} to be saved
-     * @return The persisted ${@link MarsExplorer}
-     */
-    MarsExplorer save(final MarsExplorer marsExplorer);
 }

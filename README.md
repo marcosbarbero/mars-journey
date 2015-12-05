@@ -32,7 +32,7 @@ At this session I'll be explaining the project package structure.
   - model: *Model layer* 
     - beans: *Model beans - Could be entities if we were using any database*
     - enums: *Model Enums - Invariable values*
-    - repository: *Data repository - Just a fake InMemory repository to keeps the Mars explorer robot and the routing trace*
+    - repository: *Data repository - Just a fake InMemory repository to keeps the Mars explorer*
   - service: *Services to access repository layer*
   - validator: *Validations classes*
   - web: *Web layer*
@@ -45,7 +45,7 @@ At this session you'll find the available endpoints to route Mars Explorer.
 
 * Get the current Explorer position  
 ```
-$ curl -i http://localhost:8080/rest/mars
+$ curl -i -X GET http://localhost:8080/rest/mars
   
   HTTP/1.1 200 OK
   Connection: keep-alive
@@ -60,7 +60,7 @@ $ curl -i http://localhost:8080/rest/mars
 * Rotate  
 You can rotate left and right by sending L or R values on path param
 ```
-$ curl -i localhost:8080/rest/mars/L
+$ curl -i -X GET http://localhost:8080/rest/mars/L
   
   HTTP/1.1 200 OK
   Connection: keep-alive
@@ -73,7 +73,7 @@ $ curl -i localhost:8080/rest/mars/L
   {"axisX":0,"axisY":0,"direction":"WEST"}
 ```
 ```
-$ curl -i localhost:8080/rest/mars/R
+$ curl -i -X GET http://localhost:8080/rest/mars/R
   
   HTTP/1.1 200 OK
   Connection: keep-alive
@@ -85,3 +85,47 @@ $ curl -i localhost:8080/rest/mars/R
   
   {"axisX":0,"axisY":0,"direction":"EAST"}
 ```
+* Move  
+You can move the explorer by sending the value M on path param
+```
+$ curl -i -X GET localhost:8080/rest/mars/M
+  HTTP/1.1 200 OK
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Type: application/json
+  Content-Length: 41
+  Date: Sat, 05 Dec 2015 22:13:30 GMT
+  
+  {"axisX":0,"axisY":1,"direction":"NORTH"}
+```
+You can combine Rotate (L/R) and Move (M) to make complex movements.
+```
+$ curl -i -X GET http://localhost:8080/rest/mars/MMRMMRMM
+  HTTP/1.1 200 OK
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Type: application/json
+  Content-Length: 41
+  Date: Sat, 05 Dec 2015 22:17:15 GMT
+  
+  {"axisX":2,"axisY":0,"direction":"SOUTH"}
+```
+* Reset  
+This endpoint sends the explorer to initial entry point.
+```
+$ curl -i -X POST http://localhost:8080/rest/mars/reset
+  HTTP/1.1 200 OK
+  Connection: keep-alive
+  X-Powered-By: Undertow/1
+  Server: WildFly/9
+  Content-Type: application/json
+  Content-Length: 41
+  Date: Sat, 05 Dec 2015 22:17:46 GMT
+  
+  {"axisX":0,"axisY":0,"direction":"NORTH"}
+```
+
+Errors
+---

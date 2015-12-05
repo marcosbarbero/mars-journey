@@ -3,12 +3,11 @@ package com.nasa.business.impl;
 import com.nasa.business.ExplorerRoutingBusiness;
 import com.nasa.model.beans.MarsExplorer;
 import com.nasa.model.enums.Rotation;
-import com.nasa.validator.ExplorerStepValidator;
 import com.nasa.service.ExplorerRoutingService;
+import com.nasa.validator.ExplorerStepValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
 
 /**
  * @author marcos.barbero
@@ -25,9 +24,7 @@ public class ExplorerRoutingBusinessImpl implements ExplorerRoutingBusiness {
     @Override
     public MarsExplorer resetMarsExplorer() {
         this.service.resetMarsExplorer();
-        final MarsExplorer marsExplorer = this.service.getMarsExplorer();
-        this.service.save(marsExplorer);
-        return marsExplorer;
+        return this.service.getMarsExplorer();
     }
 
     @Override
@@ -44,13 +41,6 @@ public class ExplorerRoutingBusinessImpl implements ExplorerRoutingBusiness {
                 this.service.move();
             }
         }
-        final MarsExplorer marsExplorer = this.service.getMarsExplorer();
-        this.service.save(marsExplorer);
-        return marsExplorer;
-    }
-
-    @Override
-    public List<MarsExplorer> trace() {
-        return this.service.getAll();
+        return this.service.getMarsExplorer();
     }
 }

@@ -6,7 +6,6 @@ import com.nasa.model.beans.MarsExplorer;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import java.util.logging.Logger;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -56,23 +55,5 @@ public class ExplorerRoutingResource {
     public Response resetMarsExplorer() {
         logger.info("Just reset the MarsExplorer to initial position.");
         return Response.ok(this.business.resetMarsExplorer()).build();
-    }
-
-    /**
-     * Return the trace of MarsExplorer movements.
-     *
-     * @return Trace of MarsExplorer movments.
-     */
-    @GET
-    @Path("/trace")
-    public Response trace() {
-        Response response;
-        List<MarsExplorer> explorers = this.business.trace();
-        if (explorers.isEmpty()) {
-            response = Response.status(Response.Status.NOT_FOUND).build();
-        } else {
-            response = Response.ok(explorers).build();
-        }
-        return response;
     }
 }

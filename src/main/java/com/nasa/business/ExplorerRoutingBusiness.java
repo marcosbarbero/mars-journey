@@ -2,8 +2,6 @@ package com.nasa.business;
 
 import com.nasa.model.beans.MarsExplorer;
 
-import java.util.List;
-
 /**
  * Business rules layer.
  *
@@ -33,10 +31,4 @@ public interface ExplorerRoutingBusiness {
      */
     MarsExplorer move(final String command);
 
-    /**
-     * Return a list of all moves of ${@link MarsExplorer}.
-     *
-     * @return A trace of all ${@link MarsExplorer} moves
-     */
-    List<MarsExplorer> trace();
 }

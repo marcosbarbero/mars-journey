@@ -4,12 +4,11 @@ import com.nasa.model.beans.MarsExplorer;
 import com.nasa.model.enums.Direction;
 import com.nasa.model.enums.Rotation;
 import com.nasa.model.repository.ExplorerRoutingRepository;
-import com.nasa.validator.ExplorerStepValidator;
 import com.nasa.service.ExplorerRoutingService;
+import com.nasa.validator.ExplorerStepValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -29,25 +28,25 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
 
     @Override
     public void rotate(final Rotation rotation) {
-        final MarsExplorer mars = this.repository.findCurrentExplorer();
+        final MarsExplorer mars = this.repository.findOne();
         mars.setDirection(Direction.rotate(mars.getDirection(), rotation));
     }
 
     @Override
     public MarsExplorer getMarsExplorer() {
-        final MarsExplorer mars = this.repository.findCurrentExplorer();
+        final MarsExplorer mars = this.repository.findOne();
         logger.info(String.format("Getting: %s", mars.toString()));
         return mars;
     }
 
     @Override
     public void resetMarsExplorer() {
-        this.repository.findCurrentExplorer().reset();
+        this.repository.findOne().reset();
     }
 
     @Override
     public void move() {
-        MarsExplorer mars = this.repository.findCurrentExplorer();
+        MarsExplorer mars = this.repository.findOne();
         Integer position = null;
         boolean moveAxisY = true;
         switch (mars.getDirection()) {
@@ -66,21 +65,11 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
                 moveAxisY = false;
                 break;
         }
-        validator.validatePosition(position);
+        this.validator.validatePosition(position);
         if (moveAxisY) {
             mars.setAxisY(position);
         } else {
             mars.setAxisX(position);
         }
-    }
-
-    @Override
-    public List<MarsExplorer> getAll() {
-        return this.repository.findAll();
-    }
-
-    @Override
-    public MarsExplorer save(final MarsExplorer marsExplorer) {
-        return this.repository.save(marsExplorer);
     }
 }
