@@ -3,7 +3,7 @@ package com.nasa.model.beans;
 import java.io.Serializable;
 
 /**
- * POJO With to delivery error message.
+ * POJO to delivery error message.
  *
  * @author marcos.barbero
  */

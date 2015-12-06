@@ -37,6 +37,7 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
         }
         final MarsExplorer mars = this.repository.findOne();
         mars.setDirection(Direction.rotate(mars.getDirection(), rotation));
+        logger.info(String.format("MarsExplorer is rotating to '%s'", mars.getDirection()));
     }
 
     @Override
@@ -72,6 +73,7 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
                 moveAxisY = false;
                 break;
         }
+        logger.info(String.format("MarsExplorer is moving to position: '%s' on axis: '%s'", position, moveAxisY ? "Y" : "X"));
         this.validator.validatePosition(position);
         if (moveAxisY) {
             mars.setAxisY(position);

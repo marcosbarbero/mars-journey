@@ -35,9 +35,7 @@
         </dependency>
     </dependencies>
 
-
     <build>
-        <!-- Changing build final to ROOT will make the application respond to root path of application server -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

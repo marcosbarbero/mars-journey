@@ -20,12 +20,8 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class ExplorerRoutingResource {
     public static final Logger logger = Logger.getLogger(ExplorerRoutingResource.class.getCanonicalName());
 
-    private ExplorerRoutingBusiness business;
-
     @Inject
-    public void setBusiness(ExplorerRoutingBusiness business) {
-        this.business = business;
-    }
+    private ExplorerRoutingBusiness business;
 
     /**
      * Return the current MarsExplorer.
@@ -46,6 +42,7 @@ public class ExplorerRoutingResource {
     @GET
     @Path("{command}")
     public Response move(@PathParam("command") String command) {
+        logger.info(String.format("Command received: '%s'", command));
         return Response.ok(this.business.move(command)).build();
     }
 

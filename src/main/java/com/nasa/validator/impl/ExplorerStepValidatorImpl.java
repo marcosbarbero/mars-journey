@@ -5,15 +5,38 @@ import com.nasa.model.enums.Rotation;
 import com.nasa.validator.ExplorerStepValidator;
 
 import javax.inject.Named;
+import java.util.logging.Logger;
 
 /**
  * @author marcos.barbero
  */
 @Named
 public class ExplorerStepValidatorImpl implements ExplorerStepValidator {
+    private static final Logger logger = Logger.getLogger(ExplorerStepValidatorImpl.class.getCanonicalName());
+
     private static final char MOVE_COMMAND = 'M';
     private static final int MIN_BOUND = 0;
     private static final int MAX_BOUND = 4;
+
+    /**
+     * Return a pattern with allowed movements.
+     *
+     * @return The pattern
+     */
+    private String pattern() {
+        return String.format("%s|%s|%s", MOVE_COMMAND, Rotation.LEFT.getRotation(), Rotation.RIGHT.getRotation());
+    }
+
+    /**
+     * This method only logs a message and throws a ${@link BadRequestException}.
+     *
+     * @param step The unrecognized step.
+     */
+    private void stop(final char step) {
+        String message = String.format("Unknown command received: '%s'", step);
+        logger.warning(message);
+        throw new BadRequestException(message);
+    }
 
     @Override
     public boolean isRotation(final char command) {
@@ -39,8 +62,8 @@ public class ExplorerStepValidatorImpl implements ExplorerStepValidator {
         }
         char[] steps = command.toUpperCase().toCharArray();
         for (char step : steps) {
-            if (step != MOVE_COMMAND && step != Rotation.LEFT.getRotation() && step != Rotation.RIGHT.getRotation()) {
-                throw new BadRequestException(String.format("Unknown command received: '%s'", step));
+            if (!Character.toString(step).matches(this.pattern())) {
+                this.stop(step);
             }
         }
         return steps;

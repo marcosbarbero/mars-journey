@@ -8,7 +8,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Provider to handle my ${@link com.nasa.exception.BadRequestException}.
+ * Provider to handle ${@link com.nasa.exception.BadRequestException}.
  *
  * @author marcos.barbero
  */
