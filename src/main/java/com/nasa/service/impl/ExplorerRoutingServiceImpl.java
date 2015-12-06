@@ -1,5 +1,6 @@
 package com.nasa.service.impl;
 
+import com.nasa.exception.BadRequestException;
 import com.nasa.model.beans.MarsExplorer;
 import com.nasa.model.enums.Direction;
 import com.nasa.model.enums.Rotation;
@@ -20,14 +21,20 @@ public class ExplorerRoutingServiceImpl implements ExplorerRoutingService {
 
     private static final int STEP = 1;
 
-    @Inject
-    private ExplorerStepValidator validator;
+    private final ExplorerStepValidator validator;
+    private final ExplorerRoutingRepository repository;
 
     @Inject
-    private ExplorerRoutingRepository repository;
+    public ExplorerRoutingServiceImpl(final ExplorerStepValidator validator, final ExplorerRoutingRepository repository) {
+        this.validator = validator;
+        this.repository = repository;
+    }
 
     @Override
     public void rotate(final Rotation rotation) {
+        if (rotation == null) {
+            throw new BadRequestException("Rotation value cannot be null.");
+        }
         final MarsExplorer mars = this.repository.findOne();
         mars.setDirection(Direction.rotate(mars.getDirection(), rotation));
     }

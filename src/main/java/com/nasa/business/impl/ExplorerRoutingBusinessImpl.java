@@ -15,11 +15,14 @@ import javax.inject.Named;
 @Named
 public class ExplorerRoutingBusinessImpl implements ExplorerRoutingBusiness {
 
-    @Inject
-    private ExplorerRoutingService service;
+    private final ExplorerRoutingService service;
+    private final ExplorerStepValidator validator;
 
     @Inject
-    private ExplorerStepValidator validator;
+    public ExplorerRoutingBusinessImpl(final ExplorerRoutingService service, final ExplorerStepValidator validator) {
+        this.service = service;
+        this.validator = validator;
+    }
 
     @Override
     public MarsExplorer resetMarsExplorer() {

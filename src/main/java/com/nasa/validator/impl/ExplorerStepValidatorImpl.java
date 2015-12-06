@@ -11,9 +11,9 @@ import javax.inject.Named;
  */
 @Named
 public class ExplorerStepValidatorImpl implements ExplorerStepValidator {
-    public static final char MOVE_COMMAND = 'M';
-    public static final int MIN_BOUND = 0;
-    public static final int MAX_BOUND = 4;
+    private static final char MOVE_COMMAND = 'M';
+    private static final int MIN_BOUND = 0;
+    private static final int MAX_BOUND = 4;
 
     @Override
     public boolean isRotation(final char command) {
@@ -34,6 +34,9 @@ public class ExplorerStepValidatorImpl implements ExplorerStepValidator {
 
     @Override
     public char[] validateSteps(final String command) {
+        if (command == null) {
+            throw new BadRequestException("The sent command cannot be null.");
+        }
         char[] steps = command.toUpperCase().toCharArray();
         for (char step : steps) {
             if (step != MOVE_COMMAND && step != Rotation.LEFT.getRotation() && step != Rotation.RIGHT.getRotation()) {
