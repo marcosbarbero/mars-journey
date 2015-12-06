@@ -18,7 +18,7 @@ This project use [Maven](https://maven.apache.org) for build and dependency mana
 $ mvn clean package
 ```
 #####Run
-To run this project you can use two approaches:
+To run this project you can use one of the following two approaches:
  - Configure the JBoss WildFly at your favorite IDE, add the mars-journey project in the server and run.  
  - Deploy the generated .war from ${baseDir}/target into your WildFly server.
 
@@ -171,4 +171,4 @@ $ curl -i -X GET http://localhost:8080/rest/mars/MMMMMMMMMMMMMMMMMMMMMMM
 
 Final Notes
 ---
-The listed samples were made running the project on Server ROOT path and on 8080 port, in case you add any context-path to application then you'll need to add the chosen context-path to the samples and use the same approach if you change the server port.
+The listed samples were made running the project on Server ROOT path and on 8080 port, in case you add any context-path to application then you'll need to add the chosen context-path to the samples, use the same approach if you change the server port.
