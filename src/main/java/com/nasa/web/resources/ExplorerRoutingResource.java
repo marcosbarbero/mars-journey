@@ -20,8 +20,12 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class ExplorerRoutingResource {
     public static final Logger logger = Logger.getLogger(ExplorerRoutingResource.class.getCanonicalName());
 
-    @Inject
     private ExplorerRoutingBusiness business;
+
+    @Inject
+    public void setBusiness(ExplorerRoutingBusiness business) {
+        this.business = business;
+    }
 
     /**
      * Return the current MarsExplorer.

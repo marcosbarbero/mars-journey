@@ -40,7 +40,7 @@ public class ExplorerStepValidatorImpl implements ExplorerStepValidator {
         char[] steps = command.toUpperCase().toCharArray();
         for (char step : steps) {
             if (step != MOVE_COMMAND && step != Rotation.LEFT.getRotation() && step != Rotation.RIGHT.getRotation()) {
-                throw new BadRequestException(String.format("Unknown command received: '%s", step));
+                throw new BadRequestException(String.format("Unknown command received: '%s'", step));
             }
         }
         return steps;
